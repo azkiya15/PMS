@@ -1,47 +1,91 @@
 
 <% include ../partialsdetail/headers.ejs %>
 <div class="mt-5">
-  <form action="" method="post">
+  <form action="/users" method="GET">
   <div class="container">
     <h1>Users Admin Only</h1>
     
-    
-    <div class="form-group row">
-      <label for="id" class="col-sm-2 col-form-label">
-        <input type="checkbox" name="cekid" id="id" value="valid">User ID</input></label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="userid" name="userid" placeholder="ID">
+
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-sm-2">
+          <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="ckid" <%= query.ckid ? ' checked': '' %> />
+              <label class="checkuserid">User ID</label>
+          </div>
+      </div>
+      <div class="col-sm-10">
+          <div class="form-group">
+              <input type="text" class="form-control" id="userid" name="userid" placeholder="ID" value="<%= query.userid %>"/>
+          </div>
         </div>
+  </div>
+    
+
+  <div class="row">
+      <div class="col-sm-2">
+          <div class="form-check">
+              <input class="form-check-input" 
+              type="checkbox" 
+              name="ckname"
+              <%= query.ckname ? ' checked': '' %>/>Name
+          </div>
+      </div>
+      <div class="col-sm-10">
+          <div class="form-group">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<%= query.name %>"/>
+          </div>
+        </div>
+  </div>
+  
+
+    <div class="row">
+      <div class="col-sm-2">
+          <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="ckposition"/>Position
+          </div>
+      </div>
+      <div class="col-sm-10">
+        <select class="form-control" id="role" name="role">
+            <option>Choose the Position</option>
+            <option value="Manager">Manager</option>
+            <option value="Software Developer">Software Developer</option>
+            <option value="Quality Assurance">Quality Assurance</option>
+        </select>
     </div>
-    
-    <div class="form-group row">
-      <label for="string" class="col-sm-2 col-form-label">
-        <input type="checkbox" name="cekstring" id="str" value="name">First Name</input></label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name">
-        </div>
     </div>
 
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Position</label>
-        <div class="col-sm-10">
-            <select name="progres" class="form-control">
-                <option value="manager">Manager</option>
-                <option value="software">Software Developer</option>
-                <option value="quality">Quality Assurance</option>
-            </select>
-        </div>
+    <br/>
+    <div class="row">
+      <div class="col-sm-2">
+          <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="ckworkstat"/>Working status
+          </div>
+      </div>
+      <div class="col-sm-10">
+        <select class="form-control" id="work_status" name="work_status">
+          <option>Choose</option>
+            <option value="Full time">Full time</option>
+            <option value="Part time">Part time</option>
+        </select>
+    </div>
     </div>
    
-    
+    <br/>
     <div class="form-group row">
-      <button type="submit" class="btn btn-primary" style="border-radius: 20px;">Search</button>
+      <button type="submit" class="btn btn-primary">Search</button>
     </div>
       
     </form>
+  
+  <br/>
+
+  <div class="form-group row">
+    <a type="button" class="btn btn-primary" href=/users/add>Add</a>
   </div>
 
-  <div class="container">
+  <br/>
+
+  <div class="form-group row">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -49,38 +93,53 @@
           <th>Name</th>
           <th>Position</th>
           <th>Working Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         
         <%for (let i = 0; i < model.length; i++) {%>
           <tr>
-          <td><a href="projects/overview"><%=model[i].userid%></a></td>
+          <td><%=model[i].userid%></td>
           <th><%=model[i].firstname%></th>
           <th><%=model[i].role%></th>
           <th><%=model[i].work_status%></th>
         <td>
-          <a type="button" class="btn btn-success" href="users/edit/<%=model[i].userid%>">Edit</a>
+          <a type="button" class="btn btn-outline-primary" href="/users/edit/<%=model[i].userid%>">Edit</a>
           
-           <a type="button" class="btn btn-danger" href="users/submitdel/<%=model[i].userid%>">Delete</a></td>
+           <a type="button" class="btn btn-outline-danger" href="/users/submitdel/<%=model[i].userid%>">Delete</a></td>
         </tr>
         <%}%>
         
       </tbody>
     </table>
   </div>
+
+  <div class="form-group row"> 
   <nav aria-label="Page navigation">
     <ul class="pagination">
       <li>
-        
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true"></span>
+          <nav aria-label="Page navigation example" style="margin-top:1%">
+            <ul class="pagination" class="pagination justify-content-center">
+                <li class="page-item <%= current == 1 ? 'disabled' : ''%>"><a class="page-link"
+                        href="/users<%= url.replace(`page=${parseInt(current)}`, `page=${parseInt(current) - 1}`) %>">Previous</a>
+                </li>
+                <% for(let i = 1; i <= pages; i++){ %>
+                <li class="page-item <%= current == i ? 'active' : '' %>"><a class="page-link"
+                        href="/users<%= url.replace(`page=${current}`, `page=${i}`) %>"><%= i %></a></li>
+                <% } %>
+                <li class="page-item <%= current == pages ? 'disabled' : ''%>"><a class="page-link"
+                        href="/users<%= url.replace(`page=${parseInt(current)}`, `page=${parseInt(current) + 1}`) %>">Next</a>
+                </li>
             </ul>
         </nav>
-
-  <div class="container">
-
-    <button type="button" class="btn btn-primary"><a href="users/add">Add</a></button>
-
-  </div>
+      </div>
+    
+    </div>
+      
+  
 
   
 

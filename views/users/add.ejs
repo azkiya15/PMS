@@ -59,20 +59,20 @@
         <label for="workingstatus" class="col-sm-2 col-form-label">
           Working status</label>
         <div class="col-sm-10">
-            <div class="form-check">
+            
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="fulltime" name="workingstatus" value="true"
+                    <input type="radio" id="fulltime" name="workingstatus" value="Full time"
                         class="custom-control-input">
                     <label class="custom-control-label" for="fulltime">Full time</label>
                 </div>
-            </div>
-            <div class="form-check">
+            
+            
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="parttime" name="workingstatus" value="true"
+                    <input type="radio" id="parttime" name="workingstatus" value="Part time"
                         class="custom-control-input">
                     <label class="custom-control-label" for="parttime">Part time</label>
                 </div>
-            </div>
+            
         </div>
     </div>
       
@@ -80,30 +80,49 @@
         <label for="position" class="col-sm-2 col-form-label">
           Position</label>
         <div class="col-sm-10">
-          <div class="form-check disabled">
-            <div class="custom-control custom-radio">
-                <input type="radio" id="qualityassurance" name="position" value="Quality Assurance"
-                    class="custom-control-input">
-                <label class="custom-control-label" for="qualityassurance">Quality Assurance</label>
-            </div>
-        </div>
-            <div class="form-check">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="manager" name="position" value="Manager"
-                        class="custom-control-input">
-                    <label class="custom-control-label" for="manager">Manager</label>
-                </div>
-            </div>            
-            <div class="form-check disabled">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="qualityassurance" name="position" value="Quality Assurance"
-                        class="custom-control-input">
-                    <label class="custom-control-label" for="qualityassurance">Quality Assurance</label>
-                </div>
-            </div>
+          
+              <div class="custom-control custom-radio">
+                  <input type="radio" id="manager" name="position" value="Manager"
+                      class="custom-control-input" >
+                  <label class="custom-control-label" for="manager">Manager</label>
+              </div>
+         
+              <div class="custom-control custom-radio">
+                  <input type="radio" id="softwaredeveloper" name="position" value="Software Developer"
+                      class="custom-control-input" >
+                  <label class="custom-control-label" for="softwaredeveloper">Software Developer</label>
+              </div>
+                      
+              <div class="custom-control custom-radio">
+                  <input type="radio" id="qualityassurance" name="position" value="Quality Assurance"
+                      class="custom-control-input" >
+                  <label class="custom-control-label" for="qualityassurance">Quality Assurance</label>
+              </div>
             
         </div>
     </div>
+
+
+    <div class="form-group row">
+      <label for="workingstatus" class="col-sm-2 col-form-label">
+        Status</label>
+      <div class="col-sm-10">
+          
+              <div class="custom-control custom-radio">
+                  <input type="radio" id="admin" name="status" value="Admin"
+                      class="custom-control-input">
+                  <label class="custom-control-label" for="admin">Admin</label>
+              </div>
+         
+          
+              <div class="custom-control custom-radio">
+                  <input type="radio" id="user" name="status" value="User"
+                      class="custom-control-input">
+                  <label class="custom-control-label" for="user">User</label>
+              </div>
+          
+      </div>
+  </div>
     
       <button type="submit" class="btn btn-primary">Save</button>
       </div>

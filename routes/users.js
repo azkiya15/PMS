@@ -3,16 +3,66 @@ var router = express.Router();
 
 module.exports = (pool) => {
 router.get('/', function(req, res, next) { 
-  
-  sql = `select userid, firstname, role, work_status from users`;
-   
 
-  pool.query(sql, [], (err, row) => {
+  //FILTER
+  const { ckid, userid, ckname, name, ckposition, role, ckworkstat, work_status } = req.query;
+  let params = [];
 
+  if (ckid && userid) {
+    params.push(`users.userid = ${userid}`);
+  }
+  if (ckname && name) {
+    params.push(`CONCAT (users.firstname,' ',users.lastname) LIKE '%${name}%'`)
+  }
+  if (ckposition && role) {
+    params.push(`users.role = '${role}'`)
+  }
+  if (ckworkstat && work_status) {
+    params.push(`users.status = '${work_status}'`)
+  }
+
+
+  //==========PAGINATION=============
+  let stat = false
+
+  let url = (req.url == '/') ? `/?page=1` : req.url
+  let page = req.query.page || 1; // nilai awal page
+  let limit = 3; // batas data yang di tampilkan 
+  let pages = (page - 1) * limit
+
+  let sql = `SELECT count(*) as total FROM users`;
+
+  pool.query(sql, [], (err, count) => {
+
+    let rows = count.rows[0].total //jumlah data dalam table
+      // console.log(count[0]);
+    let totalPage = Math.ceil(rows / limit) // mencari jumlah data
+    
+
+    sql = `select userid, firstname, role, work_status from users`;
+
+    console.log('this sql ', sql);
+    if (params.length > 0) {
+      sql += ` where ${params.join(" AND ")}`
+    }
+
+    if (stat == true) {
+      sql += ` where ${joindata} `
+    }
+
+    sql += ` LIMIT ${limit} OFFSET ${pages}`
+
+    pool.query(sql, [], (err, row) => {
+
+    
     console.log(row.rows);
-    res.render('users', { model: row.rows});
+    res.render('users/index', { model: row.rows, pages: totalPage, current: page, query: req.query, url: url});
 
+    })
   })
+
+
+  
 })
 
 router.get('/edit/:userid', function(req, res, next) {
@@ -28,16 +78,17 @@ router.get('/edit/:userid', function(req, res, next) {
 })
 
 router.post('/submitedit/:userid', (req, res) => {
-  const { email, password, firstname, lastname, position, workingstatus } = req.body
+  
+  const { firstname, lastname, email, password, position, workingstatus, status } = req.body
   let type = req.body.type ? true : false;
   console.log('this req body>', req.body);
 
 
 
-  let sql2 = `UPDATE users SET firstname='${firstname}', lastname='${lastname}', role='${position}', work_status='${workingstatus}' WHERE userid ='${req.params.userid}' `
+  let sql2 = `UPDATE users SET firstname='${firstname}', lastname='${lastname}', role='${position}', work_status='${workingstatus}, status='${status}' WHERE userid ='${req.params.userid}' `
   
   if (password && email !== '') {
-    sql2 = `UPDATE users SET email= '${email}', password ='${password}',firstname='${firstname}', lastname='${lastname}', role='${position}', work_status='${workingstatus}' WHERE userid ='${req.params.userid}'`;
+    sql2 = `UPDATE users SET firstname='${firstname}', lastname='${lastname}', email= '${email}', password ='${password}', role='${position}', work_status='${workingstatus}', status='${status}' WHERE userid ='${req.params.userid}'`;
   }
 
   console.log(sql2);
@@ -59,10 +110,11 @@ router.post('/submitadd', (req, res) => {
     req.body.firstname,
     req.body.lastname,
     req.body.workingstatus,
-    req.body.position
+    req.body.position,
+    req.body.status
   ];
   const sql =
-    "INSERT INTO users(email, password, firstname, lastname, work_status, role) VALUES ($1, $2, $3, $4, $5, $6)";
+    "INSERT INTO users(email, password, firstname, lastname, work_status, role, status) VALUES ($1, $2, $3, $4, $5, $6, $7)";
   pool.query(sql, book, (err, result) => {
     if (err) {
       return console.error(err.message);
@@ -76,7 +128,7 @@ router.get('/submitdel/:userid', (req, res) => {
 
   pool.query(sql, [], (err) => {
 
-    res.render('/users');
+    res.redirect("/users");
 
   })
 })
