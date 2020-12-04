@@ -1,11 +1,98 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+   
+    <title>Projects Management System</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    
+
+    <style type="text/css">
+      body {
+        background-color: #f1f1f1;
+      }
+      .bslf {
+        width: 350px;
+        margin: 120px auto;
+        padding: 25px 20px;
+        background: #06c8eb;
+        box-shadow: 2px 2px 4px #ab8de0;
+        border-radius: 5px;
+        color: #fff;
+      }
+      
+      
+    </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="bslf">
+      <form action="/login" method="post">
+        <h2 class="text-center">Project Management System</h2>
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            
+            name="password"
+          />
+        </div>
+        <div class="form-group clearfix">
+          <label class="checkbox-inline pull-left"
+            ><input type="checkbox" /> Remember me</label
+          >
+          <button type="submit" class="btn btn-primary pull-right">
+            Sign In
+          </button>
+          <br><br>
+          
+          <a href="#" class="btn btn-lg btn-primary btn-block col-sm-8" style="color: black" title="Account" data-toggle="popover"
+        data-placement="bottom"
+        data-content="Admin = admin@gmail.com, password : 123 || 
+            User = conan@gmail.com password =123 ">Access Account</a>
+        </div>
+  
+    </div>
+
+      <script>
+        $(document).ready(function () {
+          $('[data-toggle="popover"]').popover();
+        });
+      </script>
+    
+  </form>
+  </div>
+
+  <script>
+    
+  </script>    
+        </div>
+
+      </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script> 
+      $(document).ready(function(){ 
+        $('[data-toggle="popover"]').popover();  
+      }); 
+      </script> 
+      <script> 
+        $(document).ready(function(){ 
+            $('[data-toggle="popover"]').popover();    
+        }); 
+        </script> -->
   </body>
 </html>

@@ -3,9 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var Pool = require("pg").Pool;
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const pool = new Pool({
+  user: "postgres",
+    host: "localhost",
+    database: "challenge21",
+    password: "asecretthingthatnoonehastosee",
+    port: 5432
+  })
+  console.log("Successful connection to the database");
+
+var indexRouter = require('./routes/index')(pool);
+var usersRouter = require('./routes/users')(pool);
+var projectRouter = require('./routes/projects')(pool);
+var membersRouter = require('./routes/members')(pool);
 
 var app = express();
 
@@ -21,6 +33,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/projects', projectRouter);
+app.use('/profile', indexRouter);
+app.use('/members', membersRouter);
+app.use('/issues', projectRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

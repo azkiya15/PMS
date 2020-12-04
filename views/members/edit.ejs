@@ -1,0 +1,58 @@
+
+<% include ../partials/headers.ejs %>
+<div class="mt-5">
+<body>
+<div class="container" style="padding-top: 20px">
+    <form action="" method="POST">
+      <input type="hidden" name="page" value="1" />
+  
+      <!---------Menampilkan box id------->
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Nama</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control"  id="id" name="name" readonly
+            value=""
+          />
+        </div>
+      </div>
+      <fieldset class="form-group" style="margin-left: 10%">
+              <div class="row">
+                  <div class="col-sm-10">
+                  <legend class="col-form-label col-sm-10" >Position</legend>
+                  </div>
+                  <div class="col-sm-10 ml-5">
+                      <div class="form-check">
+                          <div class="custom-control custom-radio custom-control-inline">
+                              <input type="radio" name="position" id="manager"
+                                  class="custom-control-input" value="Manager" >
+                              <label class="custom-control-label" for="manager">Manager</label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-10 ml-5">
+                      <div class="form-check">
+                          <div class="custom-control custom-radio custom-control-inline">
+                              <input type="radio" name="position" id="programmer"
+                                  class="custom-control-input" value="Programmer" >
+                              <label class="custom-control-label" for="programmer">Programmer</label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-10 ml-5">
+                      <div class="form-check">
+                          <div class="custom-control custom-radio custom-control-inline">
+                              <input type="radio" name="position" id="qualityassurance"
+                                  class="custom-control-input" value="Quality
+                                  Assurance" >
+                              <label class="custom-control-label" for="qualityassurance">Quality
+                                  Assurance</label>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </fieldset>
+      <button type="submit" class="btn btn-primary" style="border-radius: 10px;">
+        Update
+      </button>
+    </form>
+  </div>

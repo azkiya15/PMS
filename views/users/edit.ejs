@@ -1,0 +1,135 @@
+<% include ../partialsdetail/headers.ejs %>
+<div class="mt-5">
+  
+<body>
+  <form action="/users/submitedit/<%= content.userid %>" method="post">
+    <div class="container">
+      <h2>Edit Users</h2>
+      
+      <div class="form-group row">
+        <label for="firstname" class="col-sm-2 col-form-label">
+          First name</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" id="firstname" name="firstname" value="<%= content.firstname %>">
+          </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="lastname" class="col-sm-2 col-form-label">
+          Last name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="lastname" name="lastname" value="<%= content.lastname %>">
+          </div>
+        </div>
+
+      <div class="form-group row">
+       <label for="email" class="col-sm-2 col-form-label">
+          Email</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="email" name="email" value="<%= content.email %>">
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">
+          Password</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="password" name="password" value="<%= content.password %>">
+          </div>
+      </div>
+
+      
+      <div class="form-group row">
+        <label for="position" class="col-sm-2 col-form-label">
+          Position</label>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="manager" name="position" value="Manager"
+                        class="custom-control-input" <%= content.role == "Manager" ? ' checked': ''%>>
+                    <label class="custom-control-label" for="manager">Manager</label>
+                </div>
+            </div>
+            <div class="form-check">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="software" name="position" value="Software Developer"
+                        class="custom-control-input" <%= content.role == "Software Developer" ? ' checked': ''%>>
+                    <label class="custom-control-label" for="programmer">Software Developer</label>
+                </div>
+            </div>
+            <div class="form-check disabled">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="qualityassurance" name="position" value="Quality Assurance"
+                        class="custom-control-input" <%= content.role == "Quality Assurance" ? ' checked': ''%>>
+                    <label class="custom-control-label" for="qualityassurance">Quality Assurance</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label for="workingstatus" class="col-sm-2 col-form-label">
+        Working status</label>
+      <div class="col-sm-10">
+          <div class="form-check">
+              <div class="custom-control custom-radio">
+                  <input type="radio" id="fulltime" name="workingstatus" value="Full time"
+                      class="custom-control-input" <%= content.work_status == "Full time" ? ' checked': ''%>>
+                  <label class="custom-control-label" for="fulltime">Full time</label>
+              </div>
+          </div>
+          <div class="form-check">
+              <div class="custom-control custom-radio">
+                  <input type="radio" id="parttime" name="workingstatus" value="Part time"
+                      class="custom-control-input" <%= content.work_status == "Part time" ? ' checked': ''%>>
+                  <label class="custom-control-label" for="parttime">Part time</label>
+              </div>
+          </div>
+      </div>
+  </div>
+
+      <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  
+  
+      <div class="form-group row">
+        <!-- <% function save() {
+          fs.readFile("data.json", "utf8", (err, data) => {
+            if (err) throw err;
+            let tampil = JSON.parse(data);
+            
+            let tambah = {
+              id: content.length + 1,
+              string: string,
+              integer: integer,
+              float: float,
+              date: date,
+              boolean: boolean,
+            };
+            tampil.push(tambah);
+            
+            fs.writeFileSync("data.json", JSON.stringify(tampil, null, 3));
+            
+            res.render("add", { title: "Express", content: save() });
+          });
+        } %> -->
+        
+        
+        <!-- <input type="submit" value="accept"/><br><br><hr> -->
+      </div>
+    </div>
+    
+  </form>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    
+  </body>
+</html>

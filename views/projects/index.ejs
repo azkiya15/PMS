@@ -1,0 +1,87 @@
+
+<% include ../partialsdetail/headers.ejs %>
+<div class="mt-5">
+  <form action="" method="post">
+  <div class="container">
+    <h1>Projects</h1>
+    
+    
+    <div class="form-group row">
+      <label for="id" class="col-sm-2 col-form-label">
+        <input type="checkbox" name="cekid" id="id" value="valid">ID</input></label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="projectid" name="projectid" placeholder="ID">
+        </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="string" class="col-sm-2 col-form-label">
+        <input type="checkbox" name="cekstring" id="str" value="name">Name</input></label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" name="name" placeholder="String">
+        </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="integer" class="col-sm-2 col-form-label">
+        <input type="checkbox" name="cekint" id="int" value="member">Member</input></label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="role" name="nminteger" placeholder="Integer">
+        </div>
+    </div>
+   
+    
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+      
+    </form>
+  </div>
+
+  <div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <%for (let i = 0; i < model.length; i++) {%>
+          <tr>
+          <td><a href="projects/overview"><%=model[i].id%></a></td>
+          <th><%=model[i].name%></th>
+          <th><%=model[i].firstname%></th>
+        <td>
+          <a type="button" class="btn btn-success" href="projects/edit/<%=model[i].id%>">Edit</a>
+          
+           <a type="button" class="btn btn-danger" href="/projects/deleted/<%= model[i].id %>">Delete</a></td>
+        </tr>
+        <%}%>
+        
+      </tbody>
+    </table>
+  </div>
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li>
+        
+            </ul>
+        </nav>
+
+  <div class="container">
+
+    <button type="button" class="btn btn-primary"><a href="projects/add">Add</a></button>
+
+  </div>
+  
+
+  
+
+</form>
+ 
+<% include ../partials/footers %>
+<script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
