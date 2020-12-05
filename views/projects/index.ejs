@@ -1,34 +1,57 @@
 
 <% include ../partialsdetail/headers.ejs %>
 <div class="mt-5">
-  <form action="" method="post">
+  <form action="/projects" method="GET">
   <div class="container">
     <h1>Projects</h1>
     
-    
-    <div class="form-group row">
-      <label for="id" class="col-sm-2 col-form-label">
-        <input type="checkbox" name="cekid" id="id" value="valid">ID</input></label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="projectid" name="projectid" placeholder="ID">
+   
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-sm-2">
+          <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="ckid"  />
+              <label class="checkuserid">ID</label>
+          </div>
+      </div>
+      <div class="col-sm-10">
+          <div class="form-group">
+              <input type="text" class="form-control" id="id" name="id" placeholder="ID" value=""/>
+          </div>
         </div>
-    </div>
-    
-    <div class="form-group row">
-      <label for="string" class="col-sm-2 col-form-label">
-        <input type="checkbox" name="cekstring" id="str" value="name">Name</input></label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" name="name" placeholder="String">
+  </div>
+        
+    <div class="row">
+      <div class="col-sm-2">
+          <div class="form-check">
+              <input class="form-check-input" 
+              type="checkbox" 
+              name="ckname"
+              />Name
+          </div>
+      </div>
+      <div class="col-sm-10">
+          <div class="form-group">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Name" value=""/>
+          </div>
         </div>
-    </div>
+  </div>
 
-    <div class="form-group row">
-      <label for="integer" class="col-sm-2 col-form-label">
-        <input type="checkbox" name="cekint" id="int" value="member">Member</input></label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="role" name="nminteger" placeholder="Integer">
+    
+    <div class="row">
+      <div class="col-sm-2">
+          <div class="form-check">
+              <input class="form-check-input" 
+              type="checkbox" 
+              name="ckfirstname"
+              />Member
+          </div>
+      </div>
+      <div class="col-sm-10">
+          <div class="form-group">
+              <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Member" value=""/>
+          </div>
         </div>
-    </div>
+  </div>
    
     
     <div class="form-group row">
@@ -36,14 +59,18 @@
     </div>
       
     </form>
-  </div>
+    <br/>
+    <div class="form-group row">
+      <a type="button" class="btn btn-primary" href=/projects/add>Add Project</a>
+    </div>
 
-  <div class="container">
+  <div class="form-group row">
     <table class="table table-striped">
       <thead>
         <tr>
           <th>ID</th>
           <th>Name</th>
+          <th>Member</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -55,7 +82,7 @@
           <th><%=model[i].name%></th>
           <th><%=model[i].firstname%></th>
         <td>
-          <a type="button" class="btn btn-success" href="projects/edit/<%=model[i].id%>">Edit</a>
+          <a type="button" class="btn btn-success" href="/projects/edit/<%=model[i].id%>">Edit</a>
           
            <a type="button" class="btn btn-danger" href="/projects/deleted/<%= model[i].id %>">Delete</a></td>
         </tr>
@@ -64,36 +91,32 @@
       </tbody>
     </table>
   </div>
-  <nav aria-label="Page navigation">
-    <ul class="pagination">
-      <li>
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <nav aria-label="Page navigation example" style="margin-top:1%">
-            <ul class="pagination" class="pagination justify-content-center">
-                <li class="page-item <%= current == 1 ? 'disabled' : ''%>"><a class="page-link"
-                        href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) - 1}`) %>">Previous</a>
-                </li>
-                <% for(let i = 1; i <= pages; i++){ %>
-                <li class="page-item <%= current == i ? 'active' : '' %>"><a class="page-link"
-                        href="<%= query.replace(`page=${current}`, `page=${i}`) %>"><%= i %></a></li>
-                <% } %>
-                <li class="page-item <%= current == pages ? 'disabled' : ''%>"><a class="page-link"
-                        href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) + 1}`) %>">Next</a>
-                </li>
-            </ul>
-        </nav>
-
-  <div class="container">
-
-    <button type="button" class="btn btn-primary"><a href="projects/add">Add</a></button>
-
-  </div>
   
-
   
+  <div class="form-group row"> 
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li>
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true"></span>
+            <nav aria-label="Page navigation example" style="margin-top:1%">
+              <ul class="pagination" class="pagination justify-content-center">
+                  <li class="page-item <%= current == 1 ? 'disabled' : ''%>"><a class="page-link"
+                          href="/projects<%= url.replace(`page=${parseInt(current)}`, `page=${parseInt(current) - 1}`) %>">Previous</a>
+                  </li>
+                  <% for(let i = 1; i <= pages; i++){ %>
+                  <li class="page-item <%= current == i ? 'active' : '' %>"><a class="page-link"
+                          href="/projects<%= url.replace(`page=${current}`, `page=${i}`) %>"><%= i %></a></li>
+                  <% } %>
+                  <li class="page-item <%= current == pages ? 'disabled' : ''%>"><a class="page-link"
+                          href="/projects<%= url.replace(`page=${parseInt(current)}`, `page=${parseInt(current) + 1}`) %>">Next</a>
+                  </li>
+              </ul>
+          </nav>
+        </div>
+  
+      </div>
 
-</form>
  
 <% include ../partials/footers %>
 <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>

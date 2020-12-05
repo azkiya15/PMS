@@ -4,7 +4,7 @@ var router = express.Router();
 module.exports = (pool) => {
 router.get('/', function(req, res, next) { 
 
-  //FILTER
+  //==========FILTER===============
   const { ckid, userid, ckname, name, ckposition, role, ckworkstat, work_status } = req.query;
   let params = [];
 
@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     params.push(`users.role = '${role}'`)
   }
   if (ckworkstat && work_status) {
-    params.push(`users.status = '${work_status}'`)
+    params.push(`users.work_status = '${work_status}'`)
   }
 
 
@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
   pool.query(sql, [], (err, count) => {
 
     let rows = count.rows[0].total //jumlah data dalam table
-      // console.log(count[0]);
+      console.log("TOTAL ", rows);
     let totalPage = Math.ceil(rows / limit) // mencari jumlah data
     
 
