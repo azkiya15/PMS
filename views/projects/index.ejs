@@ -5,17 +5,19 @@
   <div class="container">
     <h1>Projects</h1>
     
+    <input type="hidden" name="current" value="<%= current %>">
    
     <div class="row" style="margin-top: 30px;">
       <div class="col-sm-2">
           <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="ckid"  />
+
+              <input class="form-check-input" type="checkbox" name="ckid" <%= query.ckid ? ' checked': '' %> />
               <label class="checkuserid">ID</label>
           </div>
       </div>
       <div class="col-sm-10">
           <div class="form-group">
-              <input type="text" class="form-control" id="id" name="id" placeholder="ID" value=""/>
+              <input type="text" class="form-control" id="id" name="id" placeholder="ID" value="<%= query.id %>"/>
           </div>
         </div>
   </div>
@@ -26,12 +28,12 @@
               <input class="form-check-input" 
               type="checkbox" 
               name="ckname"
-              />Name
+              <%= query.ckname ? ' checked': '' %>/>Name
           </div>
       </div>
       <div class="col-sm-10">
           <div class="form-group">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Name" value=""/>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<%= query.name %>"/>
           </div>
         </div>
   </div>
@@ -43,12 +45,12 @@
               <input class="form-check-input" 
               type="checkbox" 
               name="ckfirstname"
-              />Member
+              <%= query.ckfirstname ? ' checked': '' %>/>Member
           </div>
       </div>
       <div class="col-sm-10">
           <div class="form-group">
-              <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Member" value=""/>
+              <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Member" value="<%= query.firstname %>"/>
           </div>
         </div>
   </div>
@@ -59,7 +61,40 @@
     </div>
       
     </form>
-    <br/>
+    
+
+
+    <div class="mt-5" >
+      <h1>Options</h1>
+
+      <form action="/projects" method="POST">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-sm-1 mr-5"  >
+              <p>Columns</p>
+            </div>
+            <% console.log("CHECK", checks) %>
+              <div class="col-sm-2" >
+                      <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="idChecked" checked="<%= checks.includes('idChecked') ? 'true' : 'false' %>" >
+                    <label class="custom-control-label" for="customCheck1" >ID </label>                        
+                      </div>
+              
+                      <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="customCheck2" name="nameChecked" checked="true" >
+                      <label class="custom-control-label" for="customCheck2" >Name </label>                        
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck3" name="memberChecked" checked="true"  >
+                        <label class="custom-control-label" for="customCheck3">Position </label>                        
+                      </div>
+              </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success ml-5" style="border-radius: 20px; margin-bottom: 20px;">Apply</button>
+
+
     <div class="form-group row">
       <a type="button" class="btn btn-primary" href=/projects/add>Add Project</a>
     </div>
@@ -78,13 +113,13 @@
         
         <%for (let i = 0; i < model.length; i++) {%>
           <tr>
-          <td><a href="projects/overview"><%=model[i].id%></a></td>
+          <td><a href="/projects/overview/<%= model[i].p_id %>"><%=model[i].p_id%></a></td>
           <th><%=model[i].name%></th>
-          <th><%=model[i].firstname%></th>
+          <th><%=model[i].members%></th>
         <td>
-          <a type="button" class="btn btn-success" href="/projects/edit/<%=model[i].id%>">Edit</a>
+          <a type="button" class="btn btn-success" href="/projects/edit/<%=model[i].p_id%>">Edit</a>
           
-           <a type="button" class="btn btn-danger" href="/projects/deleted/<%= model[i].id %>">Delete</a></td>
+           <a type="button" class="btn btn-danger" href="/projects/deleted/<%= model[i].p_id %>?current=<%= current %>">Delete</a></td>
         </tr>
         <%}%>
         

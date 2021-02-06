@@ -1,8 +1,8 @@
 
-<% include ../partials/headers.ejs %>
+<% include ../partialsdetail/headers.ejs %>
 <div class="mt-5">
 <body>
-    <form action="" method="POST">
+    <form action="/projects/members/<%= projectid %>/add" method="POST">
       <div class="container" style="padding: 10px">
         <h1>Add Project</h1>
         <br />
@@ -10,14 +10,14 @@
             <div class="form-group row">
               <div class="col-sm-2">Members</div>
               <div class="col-sm-10">
-                  
+                <% for(let i = 0; i < data.length; i++){ %>
                   <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="name" id="gridCheck2" value="" >
+                      <input class="form-check-input" type="radio" name="member" id="gridCheck1" value="<%=data[i].userid%>" >
                       <label class="form-check-label" for="gridCheck2">
-                       
+                        <%= data[i].firstname%> <%= data[i].lastname%>
                       </label>
                   </div>
-                  
+                  <% } %>
               </div>
           </div>
           </fieldset>    
@@ -38,18 +38,18 @@
                       <div class="col-sm-10 ml-5">
                         <div class="form-check">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" name="position" id="manager" value="Manager"
+                                <input type="radio" name="position" id="softwaredeveloper" value="Software Developer"
                                     class="custom-control-input">
-                                <label class="custom-control-label" for="manager">Manager</label>
+                                <label class="custom-control-label" for="softwaredeveloper">Software Developer</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-10 ml-5">
                         <div class="form-check">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" name="position" id="manager" value="Manager"
+                                <input type="radio" name="position" id="qualityassurance" value="Quality Assurance"
                                     class="custom-control-input">
-                                <label class="custom-control-label" for="manager">Manager</label>
+                                <label class="custom-control-label" for="qualityassurance">Quality Assurance</label>
                             </div>
                         </div>
                     </div>

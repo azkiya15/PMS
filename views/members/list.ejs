@@ -9,19 +9,19 @@
         <div class="container-fluid mt-2" >
           <h1>Members</h1>
           <h2>Filters</h2>
-          <form action="" method="GET">       
+          <form action="/projects/members/<%=id %>" method="GET">       
           <input type="hidden" name="page" value="1" /> 
             <!---------Menampilkan box id------->
           <div class="row" style="margin-top: 30px;">
               <div class="col-sm-2">
                   <div class="form-check">
-                      <input class="form-check-input" type="checkbox"name="ckid" />
+                      <input class="form-check-input" type="checkbox"name="ckid" <%= ckid ? 'checked' : "" %>/>
                       <label class="form-check-label">ID</label>
                   </div>
               </div>
               <div class="col-sm-10">
                   <div class="form-group">
-                      <input type="text" class="form-control" id="id" name="memberid"placeholder="ID" value=""/>
+                      <input type="text" class="form-control" id="id" name="id" placeholder="ID" value="<%= memberid %>" />
                   </div>
                 </div>
           </div>
@@ -32,12 +32,13 @@
                       <input class="form-check-input" 
                       type="checkbox" 
                       name="ckname"
+                      <%= ckname ? 'checked' : "" %>
                       />Name
                   </div>
               </div>
               <div class="col-sm-10">
                   <div class="form-group">
-                      <input type="text" class="form-control" id="name" name="name"placeholder="Name" value=""/>
+                      <input type="text" class="form-control" id="name" name="name"placeholder="Name" value="<%= name %>"/>
                   </div>
                 </div>
           </div>
@@ -46,12 +47,12 @@
               <div class="row">
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="ckposition"/>Position
+                        <input class="form-check-input" type="checkbox" name="ckposition" <%= ckposition ? 'checked' : "" %>/>Position
                     </div>
                 </div>
                 <div class="col-sm-8">
                       <div class="form-group col-md-8" style="margin-left: -2%">
-                              <select class="custom-select my-1 mr-sm-2" id="member" name="position">
+                              <select class="custom-select my-1 mr-sm-2" id="member" name="position" value="<%= position %>">
                                   <option>Choose the Position</option>
                                   <option value="Manager">Manager</option>
                                   <option value="Programmer">Programmer</option>
@@ -117,26 +118,25 @@
                   </tr>  
                 </thead>
                 <tbody>
-                  
+                  <%for (let i = 0; i < model.length; i++) {%>
                     <tr>
-                        <td>1</td> 
-                        <td>Azkiya</td> 
-                       <td>Manager</td>
+                        <td><%= model[i].id %></td> 
+                        <td><%= model[i].fullname %></td> 
+                       <td><%= model[i].role %></td>
       
                        
-                        <td><a class="btn btn-success" style="border-radius: 15px;" href="members/edit">Edit</a>
-                            <a class="btn btn-danger" style="border-radius: 10px; color: white" onclick="return confirm('Delete ?')" href="">Delete</a>
+                        <td><a class="btn btn-success" style="border-radius: 15px;" href="<%= url.replace(/\/?\?.*$/, `/edit/${model[i].id}`) %>">Edit</a>
+                            <a class="btn btn-danger" style="border-radius: 10px; color: white" onclick="return confirm('Delete ?')" href="<%= url.replace(/\/?\?.*$/, `/delete/${model[i].id}`) %>">Delete</a>
                         </td>
                       
                     </tr>
-                 
+                    <% } %>
                 </tbody>
               </table>
-              <nav aria-label="Page navigation example">
-                   
-              </nav>
-              <a class="btn btn-primary" style="border-radius: 20px;" href="members/add">ADD</a>
+              <% include ../partialsdetail/pagination.ejs %>
+              <a class="btn btn-primary" style="border-radius: 20px;" href="<%= url.replace(/\/?\?.*$/, `/add`) %>">ADD</a>
          
+
           
      </div><!-- Main Col END -->
 </div><!-- body-row END -->

@@ -2,24 +2,16 @@
 <div class="mt-5">
   
 <body>
-  <form action="/projects/submitedit/<%= id %>" method="post">
+  <form action="/projects/submitedit/<%= projectid %>" method="post">
     <div class="container">
       <h2>Edit Data</h2>
       <br/>
 
       <div class="form-group row">
-        <label for="id" class="col-sm-2 col-form-label">
-          ID</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="id" name="id" value="<%= projectid %>" disabled/>
-          </div>
-        </div>
-
-      <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">
           Name project</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" name="name" value="<%= name %>"/>
+            <input type="text" class="form-control" id="name" name="name" value="<%= projectName %>"/>
           </div>
         </div>
 
@@ -30,9 +22,9 @@
             <% users.forEach((item) => { %>
               <div class="custom-control custom-checkbox my-1 mr-sm-2">
                   <input type="checkbox" class="custom-control-input" id="customControlInline<%=item.userid%>"
-                      name="member" value="<%= item.userid%>, '<%= item.role %>'" <%= members.includes(item.userid)  ? ' checked': ''%>>
+                      name="member" value="'<%= item.role %>', <%= item.userid%>" <%= item.isChecked  ? ' checked': ''%>>
                   <label class="custom-control-label"
-                      for="customControlInline<%=item.userid%>"><%= item.firstname %> <%= item.lastname %></label>
+                      for="customControlInline<%=item.userid%>"><%= item.fullname %></label>
               </div>
               <% })%>
           </div>
@@ -44,29 +36,7 @@
   
   
       <div class="form-group row">
-        <!-- <% function save() {
-          fs.readFile("data.json", "utf8", (err, data) => {
-            if (err) throw err;
-            let tampil = JSON.parse(data);
-            
-            let tambah = {
-              id: content.length + 1,
-              string: string,
-              integer: integer,
-              float: float,
-              date: date,
-              boolean: boolean,
-            };
-            tampil.push(tambah);
-            
-            fs.writeFileSync("data.json", JSON.stringify(tampil, null, 3));
-            
-            res.render("add", { title: "Express", content: save() });
-          });
-        } %> -->
-        
-        
-        <!-- <input type="submit" value="accept"/><br><br><hr> -->
+       
       </div>
     </div>
     

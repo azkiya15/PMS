@@ -5,137 +5,346 @@
   <% include ../partialsdetail/sidebar.ejs %>
   <!-- MAIN -->
   <div class="col p-4">
-<div class="container">
-<div class="container-fluid mt-2" >
-    <h1>Issues</h1>
-    <h2>Filters</h2>
-    <form action="" method="GET">       
-    <input type="hidden" name="page" value="1" /> 
-      <!---------Menampilkan box id------->
-    <div class="row" style="margin-top: 30px;">
-        <div class="col-sm-2">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox"name="ckid" />
-                <label class="form-check-label">ID</label>
-            </div>
-        </div>
-        <div class="col-sm-10">
-            <div class="form-group">
-                <input type="text" class="form-control" id="id" name="memberid"placeholder="ID" value=""/>
-            </div>
-          </div>
-    </div>
-    <!---------Menampilkan box Nama------->
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="form-check">
-                <input class="form-check-input" 
-                type="checkbox" 
-                name="ckname"
-                />Subject
-            </div>
-        </div>
-        <div class="col-sm-10">
-            <div class="form-group">
-                <input type="text" class="form-control" id="subject" name="subject"placeholder="subject" value=""/>
-            </div>
-          </div>
-    </div>
-    
-        <!-------Menampilkan box Member -------->
-        <div class="row">
-          <div class="col-sm-2">
+    <div class="container">
+      <div class="container-fluid mt-2">
+        <h1>Issues</h1>
+        <h2>Filters</h2>
+        <form action="" method="GET">
+          <input type="hidden" name="page" value="1" />
+          <!---------Menampilkan box id------->
+          <div class="row" style="margin-top: 30px">
+            <div class="col-sm-2">
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="ckposition"/>Tracker
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="ckid"
+                  <%= ckid ? 'checked' : "" %>
+                />
+                <label class="form-check-label">ID</label>
               </div>
-          </div>
-          <div class="col-sm-8">
-                <div class="form-group col-md-8" style="margin-left: -2%">
-                        <select class="custom-select my-1 mr-sm-2" id="member" name="position">
-                            <option>Choose your tracker</option>
-                            <option value="Manager">Bug</option>
-                            <option value="Programmer">Feature</option>
-                            <option value="Quality Assurance">Support</option>
-                        </select>
-                </div>
             </div>
-        </div>
-            <button type="submit" class="btn btn-primary" style="border-radius: 20px;">Search</button>
-            <a href="">
-              <button type="button" class="btn btn-success" style="border-radius: 20px;">Reset</button>
-            </a>
-          
-          </div>
-          </div>
-        </form>
-
-        <!-- ====================Menampilkan Options Columns ================== -->
-
-        <div class="container-fluid ml-4" >
-            <h2>Options</h2>
-
-            <form action="" method="POST">
-              <div class="container">
-
-                <div class="row">
-                  <div class="col-sm-1 mr-5"  >
-                    <p>Columns</p>
-                  </div>
-                  
-                    <div class="col-sm-2" >
-                            <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="customCheck1" name="idChecked" value="true" >
-                          <label class="custom-control-label" for="customCheck1" >ID </label>                        
-                            </div>
-                    
-                            <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck2" name="nameChecked" value="true" >
-                            <label class="custom-control-label" for="customCheck2" >Subject </label>                        
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="customCheck3" name="positionChecked" value="true"  >
-                              <label class="custom-control-label" for="customCheck3">Tracker </label>                        
-                            </div>
-                    </div>
-                </div>
+            <div class="col-sm-10">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="id"
+                  name="issueid"
+                  placeholder="ID"
+                  value="<%= issueid %>"
+                />
               </div>
-              <button type="submit" class="btn btn-success ml-5" style="border-radius: 20px; margin-bottom: 20px;">Apply</button>
-            </form>  
-        
-        <!-- ====================Menampilkan END  Options Columns ================== -->
+            </div>
+          </div>
+          <!---------Menampilkan box Subject------->
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="cksubject"
+                  <%= cksubject ? 'checked' : "" %>
+                />Subject
+              </div>
+            </div>
+            <div class="col-sm-10">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subject"
+                  name="subject"
+                  placeholder="subject"
+                  value="<%= subject %>"
+                />
+              </div>
+            </div>
+          </div>
 
-        <table class="table table-striped ml-5" border="1">
-          <thead class="ml-5">
-            <tr>
-                 <th scope="col">#</th> 
-                <th scope="col">Subject</th>
-                <th scope="col">Tracker</th>
-               
-                  <th scope="col">Action</th>
-                 
-            </tr>  
-          </thead>
-          <tbody>
-            
-              <tr>
-                  <td>1</td> 
-                  <td>Azkiya</td> 
-                 <td>Manager</td>
+          <!-------Menampilkan box tracker -------->
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="cktracker"
+                  <%= cktracker ? 'checked' : "" %>
+                />Tracker
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div
+                class="form-group col-md-8"
+                style="margin-left: -2%"
+              >
+                <select
+                  class="custom-select my-1 mr-sm-2"
+                  id="member"
+                  name="tracker"
+                  value="<%= tracker %>"
+                >
+                  <option>Choose your tracker</option>
+                  <option value="Bug">Bug</option>
+                  <option value="Feature">Feature</option>
+                  <option value="Support">Support</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
-                 
-                  <td><a class="btn btn-success" style="border-radius: 15px;" href="editIssues">Edit</a>
-                      <a class="btn btn-danger" style="border-radius: 10px; color: white" onclick="return confirm('Delete ?')" href="">Delete</a>
-                  </td>
-                
-              </tr>
-           
-          </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-             
-        </nav>
-        <a class="btn btn-primary" style="border-radius: 20px;" href="addIssues">ADD</a>
+          <!-------Menampilkan box status -------->
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="ckstatus"
+                  <%= ckstatus ? 'checked' : "" %>
+                />Tracker
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div
+                class="form-group col-md-8"
+                style="margin-left: -2%"
+              >
+                <select
+                  class="custom-select my-1 mr-sm-2"
+                  id="status"
+                  name="status"
+                  value="<%= status %>"
+                >
+                  <option>Choose your status</option>
+                  <option value="New">New</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Resolved">Resolved</option>
+                  <option value="Feedback">Feedback</option>
+                  <option value="Closed">Closed</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-------Menampilkan box priority -------->
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="ckpriority"
+                  <%= ckpriority ? 'checked' : "" %>
+                />Priority
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div
+                class="form-group col-md-8"
+                style="margin-left: -2%"
+              >
+                <select
+                  class="custom-select my-1 mr-sm-2"
+                  id="priority"
+                  name="priority"
+                  value="<%= priority %>"
+                >
+                  <option>Choose</option>
+                  <option value="Normal">Normal</option>
+                  <option value="High">High</option>
+                  <option value="Urgent">Urgent</option>
+                  <option value="Intermediate">Intermediate</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!---------Menampilkan box Done------->
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="ckdone"
+                  <%= ckdone ? 'checked' : "" %>
+                />Done
+              </div>
+            </div>
+            <div class="col-sm-10">
+              <div class="form-group">
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  class="form-control"
+                  id="done"
+                  name="done"
+                  placeholder="subject"
+                  value="<%= done %>"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="border-radius: 20px"
+          >
+            Search
+          </button>
+          <a href="">
+            <button
+              type="button"
+              class="btn btn-success"
+              style="border-radius: 20px"
+            >
+              Reset
+            </button>
+          </a>
+        </form>
       </div>
-      </div> 
-          
-          
+    </div>
+
+    <!-- ====================Menampilkan Options Columns ================== -->
+
+    <div class="container-fluid ml-4">
+      <h2>Options</h2>
+
+      <form action="" method="POST">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-1 mr-5">
+              <p>Columns</p>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="customCheck1"
+                  name="idChecked"
+                  value="true"
+                />
+                <label class="custom-control-label" for="customCheck1"
+                  >ID
+                </label>
+              </div>
+
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="customCheck2"
+                  name="nameChecked"
+                  value="true"
+                />
+                <label class="custom-control-label" for="customCheck2"
+                  >Subject
+                </label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="customCheck3"
+                  name="positionChecked"
+                  value="true"
+                />
+                <label class="custom-control-label" for="customCheck3"
+                  >Tracker
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-success ml-5"
+          style="border-radius: 20px; margin-bottom: 20px"
+        >
+          Apply
+        </button>
+      </form>
+
+      <!-- ====================Menampilkan END  Options Columns ================== -->
+
+      <table class="table table-striped ml-5" border="1">
+        <thead class="ml-5">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Tracker</th>
+            <th scope="col">Status</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Target Version</th>
+            <th scope="col">Created Date</th>
+            <th scope="col">Updated Date</th>
+            <th scope="col">Closed Date</th>
+            <th scope="col">Estimated Time</th>
+            <th scope="col">Spent Time</th>
+            <th scope="col">Done</th>
+
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%for (let i = 0; i < data.length; i++) {%>
+            <tr>
+                <td><%= data[i].issueid %></td> 
+                <td><%= data[i].subject %></td> 
+               <td><%= data[i].tracker %></td>
+               <td><%= data[i].status %></td>
+               <td><%= data[i].priority %></td>
+               <td><%= data[i].startdate %></td>
+               <td><%= data[i].duedate %></td>
+               <td><%= data[i].targetversion %></td>
+               <td><%= data[i].crateddate %></td>
+               <td><%= data[i].updateddate %></td>
+               <td><%= data[i].closeddate %></td>
+               <td><%= data[i].estimatedtime %></td>
+               <td><%= data[i].spenttime %></td>
+               <td><%= data[i].done %></td>
+
+               
+                <td>
+                  <a 
+                    class="btn btn-success" 
+                    style="border-radius: 15px;" 
+                    href="<%= url.replace(/\/?\?.*$/, `/edit/${data[i].issueid}`) %>"
+                  >
+                    Edit
+                  </a>
+                  <a 
+                    class="btn btn-danger" 
+                    style="border-radius: 10px; color: white" 
+                    onclick="return confirm('Delete ?')" 
+                    href="<%= url.replace(/\/?\?.*$/, `/delete/${data[i].issueid}`) %>"
+                  >
+                    Delete
+                  </a>
+                </td>
+              
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    
+      <% include ../partialsdetail/pagination.ejs %>
+      <a
+        class="btn btn-primary"
+        style="border-radius: 20px"
+        href="addIssues"
+        >ADD</a
+      >
+    </div>
+  </div>
+</div>

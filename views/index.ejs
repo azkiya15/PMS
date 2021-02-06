@@ -31,6 +31,12 @@
     <div class="bslf">
       <form action="/login" method="post">
         <h2 class="text-center">Project Management System</h2>
+        <%_ if(loginInfo){ %>
+          <div class="alert alert-danger" role="alert"><%= loginInfo %></div>
+        <%_ }%>
+        <%_ if(latestUrl){ %>
+        <input type="hidden" name="latestUrl" value="<%= latestUrl %>">
+        <%_ }%>
         <div class="form-group">
           <input
             type="email"
